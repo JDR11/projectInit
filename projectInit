@@ -1,0 +1,91 @@
+#!/usr/bin/bash
+
+if [ ! -d "/home/joshuar/Projects/" ]
+then
+  mkdir $HOME/Projects
+fi
+
+read -p "Enter Project Name: " PNAME
+sleep 1
+
+mkdir $HOME/Projects/$PNAME
+
+while true
+do
+  read -p "Enter Project Type[hardware(h)/software(s)/both(b)/blank(bl)]: " PTYPE
+  case "$PTYPE" in
+    [hH] | [hH][aA][rR][dD][wW][aA][rR][eE])
+      mkdir $HOME/Projects/$PNAME/KiCAD
+      mkdir $HOME/Projects/$PNAME/Fritzing
+      mkdir $HOME/Projects/$PNAME/CAD
+      mkdir $HOME/Projects/$PNAME/docs
+      PTYPE='h'
+      break
+      ;;
+    [sS] | [sS][oO][fF][tT][wW][aA][rR][eE])
+      mkdir $HOME/Projects/$PNAME/docs
+      mkdir $HOME/Projects/$PNAME/src
+      mkdir $HOME/Projects/$PNAME/debug
+      mkdir $HOME/Projects/$PNAME/tests
+      mkdir $HOME/Projects/$PNAME/data
+      mkdir $HOME/Projects/$PNAME/lib
+      mkdir $HOME/Projects/$PNAME/include
+      mkdir $HOME/Projects/$PNAME/bin
+      mkdir $HOME/Projects/$PNAME/etc
+      PTYPE='s'
+      break
+      ;;
+    [bB] | [bB][oO][tT][hH])
+      mkdir $HOME/Projects/$PNAME/docs
+      mkdir $HOME/Projects/$PNAME/src
+      mkdir $HOME/Projects/$PNAME/debug
+      mkdir $HOME/Projects/$PNAME/tests
+      mkdir $HOME/Projects/$PNAME/data
+      mkdir $HOME/Projects/$PNAME/lib
+      mkdir $HOME/Projects/$PNAME/include
+      mkdir $HOME/Projects/$PNAME/bin
+      mkdir $HOME/Projects/$PNAME/etc
+      mkdir $HOME/Projects/$PNAME/KiCAD
+      mkdir $HOME/Projects/$PNAME/Fritzing
+      mkdir $HOME/Projects/$PNAME/CAD
+      PTYPE='b'
+      break
+      ;;
+    [bB][lL] | [bB][lL][aA][nN][kK])
+      mkdir $HOME/Projects/$PNAME/docs
+      PTYPE='bl'
+      break
+      ;;
+    *)
+      echo "Enter a valid project type."
+      ;;
+  esac
+done
+
+LANGLIST=(python c c++ c\# rust javascript nodejs)
+while [ true ]; do
+  if [ $PTYPE == "s" ] || [ $PTYPE == "b" ]
+  then
+    read -p "Enter Project Base Language: " PLANG
+    for i in "${LANGLIST[@]}"
+    do
+      if [ $i == $PLANG ]
+      then
+        LANGSTATE=True
+        break 2
+      fi
+    done
+    LANGSTATE=False
+    echo "Not valid language" # To add boilerplate code for a new language, create a pull request at https://github.com/JDR11/projectInit
+    break
+  fi
+done
+
+case "PLANG" in
+  *)
+    echo default
+    ;;
+esac
+
+# 1fc0c84cc862a010b23e669824b0fdf06bf53f4a      gitea access token
+# curl -X 'POST' 'http://192.168.8.212:3000/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token 1fc0c84cc862a010b23e669824b0fdf06bf53f4a' -d '{"default_branch": "main", "description": "test", "name": "test", "private": true, "readme": "string", "trust_model": "default"}'       gitea repo create api command
