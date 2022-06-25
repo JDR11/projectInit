@@ -80,7 +80,13 @@ while [ true ]; do
   fi
 done
 
-svn export https://github.com/JDR11/projectInit.git/trunk/${PLANG,,} $HOME/Projects/$PNAME/
+svn export https://github.com/JDR11/projectInit.git/trunk/${PLANG,,} $HOME/Projects/$PNAME/ --force
 
-# 1fc0c84cc862a010b23e669824b0fdf06bf53f4a      gitea access token
-# curl -X 'POST' 'http://192.168.8.212:3000/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token 1fc0c84cc862a010b23e669824b0fdf06bf53f4a' -d '{"default_branch": "main", "description": "test", "name": "test", "private": true, "readme": "string", "trust_model": "default"}'       gitea repo create api command
+cd $HOME/Projects/$PNAME/
+touch README
+git init
+git add -A
+git commit -m "Initialised project."
+curl -X 'POST' 'http://192.168.8.250:3000/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token 1fc0c84cc862a010b23e669824b0fdf06bf53f4a' -d '{"default_branch": "master", "name": "'${PNAME}'", "private": true, "trust_model": "default"}'
+git remote add local http://192.168.8.250:3000/joshuar/$PNAME.git
+git push -u local master
