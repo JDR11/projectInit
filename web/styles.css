@@ -1,0 +1,58 @@
+/* Reset some default browser styles for consistency */
+body, h1, h2, p, ul, li {
+    margin:0;
+    padding: 0;
+}
+
+/* Set a background colour and text colour for the entire page */
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the header section */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style the navigation menu */
+nav {
+    background-color: #444;
+    color: #fff;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Style the main content section */
+main {
+    padding: 20px;
+}
+
+/* Style the footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Add additional styles for your specific content as needed */
