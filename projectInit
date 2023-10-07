@@ -12,7 +12,7 @@ mkdir $HOME/Projects/$PNAME
 
 while true
 do
-  read -p "Enter Project Type[hardware(h)/software(s)/both(b)/blank(bl)]: " PTYPE
+  read -p "Enter Project Type[hardware(h)/software(s)/both(b)/empty(e)]: " PTYPE
   case "$PTYPE" in
     [hH] | [hH][aA][rR][dD][wW][aA][rR][eE])
       mkdir $HOME/Projects/$PNAME/KiCAD
@@ -51,7 +51,7 @@ do
       PTYPE='b'
       break
       ;;
-    [bB][lL] | [bB][lL][aA][nN][kK])
+    [eE] | [eE][mM][pP][tT][yY])
       mkdir $HOME/Projects/$PNAME/docs
       PTYPE='bl'
       break
