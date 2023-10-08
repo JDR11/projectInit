@@ -1,0 +1,15 @@
+{
+  "name": "add_name_here",
+  "version": "1.0.0",
+  "description": "Add description here",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "Add",
+    "keywords"
+  ],
+  "author": "Add own name here",
+  "license": "ISC"
+}
