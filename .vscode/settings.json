@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "stdio.h": "c"
+  },
+  "cSpell.words": ["MYHEADER"],
+  "cmake.configureOnOpen": false
+}
