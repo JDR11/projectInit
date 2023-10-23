@@ -1,58 +1,58 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 if [ ! -d "/home/joshuar/Projects/" ]
 then
-  mkdir $HOME/Projects
+  mkdir "$HOME"/Projects
 fi
 
-read -p "Enter Project Name: " PNAME
+read -r -p "Enter Project Name: " PNAME
 sleep 1
 
-mkdir $HOME/Projects/$PNAME
+mkdir "$HOME"/Projects/"$PNAME"
 
 while true
 do
-  read -p "Enter Project Type[hardware(h)/software(s)/both(b)/empty(e)]: " PTYPE
+  read -r -p "Enter Project Type[hardware(h)/software(s)/both(b)/empty(e)]: " PTYPE
   case "$PTYPE" in
     [hH] | [hH][aA][rR][dD][wW][aA][rR][eE])
-      mkdir $HOME/Projects/$PNAME/KiCAD
-      mkdir $HOME/Projects/$PNAME/Fritzing
-      mkdir $HOME/Projects/$PNAME/CAD
-      mkdir $HOME/Projects/$PNAME/docs
+      mkdir "$HOME"/Projects/"$PNAME"/KiCAD
+      mkdir "$HOME"/Projects/"$PNAME"/Fritzing
+      mkdir "$HOME"/Projects/"$PNAME"/CAD
+      mkdir "$HOME"/Projects/"$PNAME"/docs
       PTYPE='h'
       break
       ;;
     [sS] | [sS][oO][fF][tT][wW][aA][rR][eE])
-      mkdir $HOME/Projects/$PNAME/docs
-      mkdir $HOME/Projects/$PNAME/src
-      mkdir $HOME/Projects/$PNAME/debug
-      mkdir $HOME/Projects/$PNAME/tests
-      mkdir $HOME/Projects/$PNAME/data
-      mkdir $HOME/Projects/$PNAME/lib
-      mkdir $HOME/Projects/$PNAME/include
-      mkdir $HOME/Projects/$PNAME/bin
-      mkdir $HOME/Projects/$PNAME/etc
+      mkdir "$HOME"/Projects/"$PNAME"/docs
+      mkdir "$HOME"/Projects/"$PNAME"/src
+      mkdir "$HOME"/Projects/"$PNAME"/debug
+      mkdir "$HOME"/Projects/"$PNAME"/tests
+      mkdir "$HOME"/Projects/"$PNAME"/data
+      mkdir "$HOME"/Projects/"$PNAME"/lib
+      mkdir "$HOME"/Projects/"$PNAME"/include
+      mkdir "$HOME"/Projects/"$PNAME"/bin
+      mkdir "$HOME"/Projects/"$PNAME"/etc
       PTYPE='s'
       break
       ;;
     [bB] | [bB][oO][tT][hH])
-      mkdir $HOME/Projects/$PNAME/docs
-      mkdir $HOME/Projects/$PNAME/src
-      mkdir $HOME/Projects/$PNAME/debug
-      mkdir $HOME/Projects/$PNAME/tests
-      mkdir $HOME/Projects/$PNAME/data
-      mkdir $HOME/Projects/$PNAME/lib
-      mkdir $HOME/Projects/$PNAME/include
-      mkdir $HOME/Projects/$PNAME/bin
-      mkdir $HOME/Projects/$PNAME/etc
-      mkdir $HOME/Projects/$PNAME/KiCAD
-      mkdir $HOME/Projects/$PNAME/Fritzing
-      mkdir $HOME/Projects/$PNAME/CAD
+      mkdir "$HOME"/Projects/"$PNAME"/docs
+      mkdir "$HOME"/Projects/"$PNAME"/src
+      mkdir "$HOME"/Projects/"$PNAME"/debug
+      mkdir "$HOME"/Projects/"$PNAME"/tests
+      mkdir "$HOME"/Projects/"$PNAME"/data
+      mkdir "$HOME"/Projects/"$PNAME"/lib
+      mkdir "$HOME"/Projects/"$PNAME"/include
+      mkdir "$HOME"/Projects/"$PNAME"/bin
+      mkdir "$HOME"/Projects/"$PNAME"/etc
+      mkdir "$HOME"/Projects/"$PNAME"/KiCAD
+      mkdir "$HOME"/Projects/"$PNAME"/Fritzing
+      mkdir "$HOME"/Projects/"$PNAME"/CAD
       PTYPE='b'
       break
       ;;
     [eE] | [eE][mM][pP][tT][yY])
-      mkdir $HOME/Projects/$PNAME/docs
+      mkdir "$HOME"/Projects/"$PNAME"/docs
       PTYPE='bl'
       break
       ;;
@@ -63,13 +63,13 @@ do
 done
 
 LANGLIST=(python c c++ c\# rust web nodejs)
-while [ true ]; do
-  if [ $PTYPE == "s" ] || [ $PTYPE == "b" ]
+while true; do
+  if [ "$PTYPE" == "s" ] || [ "$PTYPE" == "b" ]
   then
-    read -p "Enter Project Base Language: " PLANG
+    read -r -p "Enter Project Base Language: " PLANG
     for i in "${LANGLIST[@]}"
     do
-      if [ $i == ${PLANG,,} ]
+      if [ "$i" == "${PLANG,,}" ]
       then
         LANGSTATE=True
         break 2
@@ -80,13 +80,13 @@ while [ true ]; do
   fi
 done
 
-svn export https://github.com/JDR11/projectInit.git/trunk/${PLANG,,} $HOME/Projects/$PNAME/ --force
+svn export https://github.com/JDR11/projectInit.git/trunk/"${PLANG,,}" "$HOME"/Projects/"$PNAME"/ --force
 
-cd $HOME/Projects/$PNAME/
+cd "$HOME/Projects/$PNAME/" || exit
 touch README
 git init
 git add -A
 git commit -m "Initialised project."
-curl -X 'POST' 'http://192.168.8.250:3000/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token 1fc0c84cc862a010b23e669824b0fdf06bf53f4a' -d '{"default_branch": "master", "name": "'${PNAME}'", "private": true, "trust_model": "default"}'
-git remote add local http://192.168.8.250:3000/joshuar/$PNAME.git
+curl -X 'POST' 'http://192.168.8.250:3000/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token 1fc0c84cc862a010b23e669824b0fdf06bf53f4a' -d '{"default_branch": "master", "name": "'"${PNAME}"'", "private": true, "trust_model": "default"}'
+git remote add local http://192.168.8.250:3000/joshuar/"$PNAME".git
 git push -u local master
