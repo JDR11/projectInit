@@ -87,6 +87,6 @@ touch README
 git init
 git add -A
 git commit -m "Initialised project."
-curl -X 'POST' 'http://192.168.8.250:3000/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token 1fc0c84cc862a010b23e669824b0fdf06bf53f4a' -d '{"default_branch": "master", "name": "'"${PNAME}"'", "private": true, "trust_model": "default"}'
-git remote add local http://192.168.8.250:3000/joshuar/"$PNAME".git
+curl -X 'POST' 'http://192.168.0.50:3002/api/v1/user/repos' -H 'accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: token f59bf382a4f140195d28b435de26aacd54d97347' -d '{"default_branch": "master", "name": "'"${PNAME}"'", "private": true, "trust_model": "default"}'
+git remote add local http://192.168.0.50:3002/joshuar/"$PNAME".git
 git push -u local master
