@@ -80,7 +80,12 @@ while true; do
   fi
 done
 
-svn export https://github.com/JDR11/projectInit.git/trunk/"${PLANG,,}" "$HOME"/Projects/"$PNAME"/ --force
+# svn export https://github.com/JDR11/projectInit.git/trunk/"${PLANG,,}" "$HOME"/Projects/"$PNAME"/ --force
+
+pushd /tmp
+curl -L https://api.github.com/repos/JDR11/projectInit/tarball | tar xzf -
+cp -r ./JDR11-projectInit-*/$PLANG/* $HOME/Projects/$PNAME/
+popd
 
 cd "$HOME/Projects/$PNAME/" || exit
 touch README
