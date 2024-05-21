@@ -62,7 +62,7 @@ do
   esac
 done
 
-LANGLIST=(python c c++ c\# rust web nodejs)
+LANGLIST=(python c c++ c\# rust web nodejs java)
 while true; do
   if [ "$PTYPE" == "s" ] || [ "$PTYPE" == "b" ]
   then
